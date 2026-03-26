@@ -1,4 +1,4 @@
-FROM alpine:9.99
+FROM alpine:3.20
 ENV VERSION="1.34.4575.42"
 
 # Build deps
