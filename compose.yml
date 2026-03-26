@@ -1,0 +1,35 @@
+services:
+  mongo:
+    image: mongo:latest
+    container_name: pritunldb
+    restart: "always"
+    hostname: pritunldb
+    network_mode: bridge
+    volumes:
+      - ./db:/data/db
+
+  pritunl:
+    build: .
+    image: pritunl
+    container_name: pritunl
+    restart: "always"
+    hostname: pritunl
+    depends_on:
+        - mongo
+    network_mode: bridge
+    privileged: true
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv6.conf.all.disable_ipv6=0
+    links:
+      - mongo
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 80:80
+      - 443:443
+      - 1194:1194
+      - 1194:1194/udp
+      - 1195:1195/udp
+    environment:
+      - TZ="Europe/Moscow"
