@@ -1,3 +1,8 @@
+Добавялем в конфиг контейнера две строки через команду  nano /etc/pve/lxc/105.conf (меняем номер контейнера)
+lxc.cgroup2.devices.allow: c 10:200 rwm
+lxc.mount.entry: /dev/net dev/net none bind,create=dir
+
+
 Pritunl Server
 
 1. Склонировать репозиторий: git clone https://github.com/Progex-ex/progex.git
